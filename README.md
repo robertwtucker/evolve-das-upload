@@ -1,4 +1,4 @@
-# Transformd Demo Connector
+# DAS Upload Component
 
 ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Frobertwtucker%2Fevolve-das-upload%2Fmaster%2Fpackage.json&query=%24.version&label=version)
 ![open issues](https://img.shields.io/github/issues-raw/robertwtucker/evolve-das-upload)

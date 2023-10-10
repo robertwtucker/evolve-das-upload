@@ -1,11 +1,24 @@
 {
-  "main": "src/index.ts",
+  "name": "das-upload",
+  "version": "0.0.1",
+  "description": "An Evolve (Generate) component for uploading docs to Digital Advantage",
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "bb b -m 0 -b 0",
     "script-upload": "swarm script upload",
     "lint": "eslint . --ext .ts --ignore-pattern .gitignore"
   },
+  "main": "src/index.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robertwtucker/evolve-das-upload.git"
+  },
+  "bugs": {
+    "url": "https://github.com/robertwtucker/evolve-das-upload/issues"
+  },
+  "homepage": "https://github.com/robertwtucker/evolve-das-upload/blob/master/README.md",
   "devDependencies": {
     "@quadient/evolve-scripting-api": "latest",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
