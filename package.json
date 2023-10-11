@@ -1,6 +1,6 @@
 {
   "name": "das-upload",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "An Evolve (Generate) component for uploading docs to Digital Advantage",
   "type": "module",
   "private": true,
@@ -13,12 +13,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/robertwtucker/evolve-das-upload.git"
+    "url": "git+https://github.com/robertwtucker/hospitality-demo-das-upload.git"
   },
   "bugs": {
-    "url": "https://github.com/robertwtucker/evolve-das-upload/issues"
+    "url": "https://github.com/robertwtucker/hospitality-demo-das-upload/issues"
   },
-  "homepage": "https://github.com/robertwtucker/evolve-das-upload/blob/master/README.md",
+  "homepage": "https://github.com/robertwtucker/hospitality-demo-das-upload/blob/master/README.md",
   "devDependencies": {
     "@quadient/evolve-scripting-api": "latest",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
