@@ -26,6 +26,7 @@ export function getDescription(): ScriptDescription {
         displayName: 'DAS connector',
         description:
           'The web endpoint connector configured with the URL of Digital Advantage instance to use.',
+        defaultValue: '/api/query/MobileBackend/ContentUploadV4',
         type: 'Connector',
         required: true,
       },
@@ -126,15 +127,11 @@ async function uploadDocument(context: Context, data: string): Promise<void> {
   })
 
   console.log('Calling DAS API to upload document')
-  const dasConnector = context.parameters.dasConnector as string
-  const response = await fetch(
-    `${dasConnector}/api/query/MobileBackend/ContentUploadV4`,
-    {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify(body),
-    }
-  )
+  const response = await fetch(context.parameters.dasConnector as string, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(body),
+  })
   console.log(`DAS API response: ${response}`)
 
   const json = await response.json()
