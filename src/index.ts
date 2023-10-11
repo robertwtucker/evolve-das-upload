@@ -6,6 +6,7 @@
 export function getDescription(): ScriptDescription {
   return {
     description: 'Script to upload Evolve documents to Digital Advantage',
+    icon: 'upload',
     input: [
       {
         id: 'inputDataPath',
