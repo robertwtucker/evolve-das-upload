@@ -1,12 +1,12 @@
-# DAS Upload Component
+# Hospitality Demo - DAS Upload Component
 
-![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Frobertwtucker%2Fevolve-das-upload%2Fmaster%2Fpackage.json&query=%24.version&label=version)
-![open issues](https://img.shields.io/github/issues-raw/robertwtucker/evolve-das-upload)
-![license](https://img.shields.io/github/license/robertwtucker/evolve-das-upload)
+![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Frobertwtucker%2Fhospitality-demo-das-upload%2Fmaster%2Fpackage.json&query=%24.version&label=version)
+![open issues](https://img.shields.io/github/issues-raw/robertwtucker/hospitality-demo-das-upload)
+![license](https://img.shields.io/github/license/robertwtucker/hospitality-demo-das-upload)
 
 ## Overview
 
-A pipeline script for use with the
+A pipeline script for use in a demo featuring
 [Quadient Inspire Evolve](https://www.quadient.com/en/customer-communications/inspire-evolve)
 and the Generate service.
 
@@ -27,13 +27,13 @@ installed:
 To build the script component, clone this repository:
 
 ```bash
-git clone https://github.com/robertwtucker/evolve-das-upload.git
+git clone https://github.com/robertwtucker/hospitality-demo-das-upload.git
 ```
 
 Run `Bobril build` to generate the `dist/a.js` file:
 
 ```bash
-cd evolve-das-upload
+cd hospitality-demo-das-upload
 npm run build
 ```
 
@@ -62,12 +62,12 @@ script over to the pipeline. Complete the properties section as required.
 
 ## History
 
-See [CHANGELOG.md](https://github.com/robertwtucker/evolve-das-upload/blob/master/CHANGELOG.md)
+See [CHANGELOG.md](https://github.com/robertwtucker/hospitality-demo-das-upload/blob/master/CHANGELOG.md)
 for more information.
 
 ## Roadmap
 
-See the [open issues](https://github.com/robertwtucker/evolve-das-upload/issues)
+See the [open issues](https://github.com/robertwtucker/hospitality-demo-das-upload/issues)
 for a list of proposed features (and known issues).
 
 ## Contributing
@@ -77,9 +77,9 @@ to learn, inspire, and create. Any contributions you make are sincerely
 appreciated.
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+2. Create your Feature Branch (`git checkout -b feat/amazing-feature`)
+3. Commit your Changes (`git commit -m 'feat: add some amazing feature'`)
+4. Push to the Branch (`git push origin feat/amazing-feature`)
 5. Open a Pull Request
 
 ## License
@@ -91,4 +91,4 @@ See `LICENSE` for more information.
 
 Robert Tucker - [@robertwtucker](https://twitter.com/robertwtucker)
 
-Project Link: [https://github.com/robertwtucker/evolve-das-upload](https://github.com/robertwtucker/evolve-das-upload)
+Project Link: [https://github.com/robertwtucker/hospitality-demo-das-upload](https://github.com/robertwtucker/hospitality-demo-das-upload)
