@@ -42,13 +42,15 @@ export function getDescription(): ScriptDescription {
 }
 
 export async function execute(context: Context): Promise<void> {
-  const inputJson = await readInputFile(context)
-  await uploadDocument(context, inputJson)
+  const input = await readInputFile(context)
+  await uploadDocument(context, input.Clients[0])
 }
 
-async function readInputFile(context: Context): Promise<string> {
-  const inputDataPath = context.parameters.inputDataPath as string
-  return await context.getFile(inputDataPath).read()
+async function readInputFile(context: Context): Promise<InvoicePayload> {
+  const inputData = await context
+    .getFile(context.parameters.inputDataPath as string)
+    .read()
+  return JSON.parse(inputData)
 }
 
 async function readDocumentAsBase64(context: Context): Promise<string> {
@@ -56,20 +58,18 @@ async function readDocumentAsBase64(context: Context): Promise<string> {
   return await context.getFile(documentPath).readAsBase64()
 }
 
-async function uploadDocument(context: Context, data: string): Promise<void> {
-  const jsonData = JSON.parse(data)
-
+async function uploadDocument(context: Context, data: Client): Promise<void> {
   const body = {
     documents: [
       {
         clientAccessRights: [
           {
-            clientId: jsonData.guestClientId,
+            clientId: data.guestClientId,
             right: 'Delete',
           },
         ],
-        fileName: 'string',
-        name: 'string',
+        fileName: 'invoice.pdf',
+        name: 'Invoice',
         applicationId: context.parameters.applicationId as string,
         publicAccessRight: 'None',
         metadata: [
@@ -82,41 +82,41 @@ async function uploadDocument(context: Context, data: string): Promise<void> {
           {
             name: 'hotelName',
             type: 'Text',
-            value: jsonData.hotelName,
+            value: data.hotel.name,
             isReadOnly: true,
           },
           {
             name: 'checkIn',
             type: 'Text',
-            value: jsonData.checkInDate,
+            value: data.checkInDate,
             isReadOnly: true,
           },
           {
             name: 'checkOut',
             type: 'Text',
-            value: jsonData.checkOutDate,
+            value: data.checkOutDate,
             isReadOnly: true,
           },
           {
             name: 'guests',
             type: 'Number',
-            value: jsonData.guests,
+            value: data.guests,
             isReadOnly: true,
           },
           {
             name: 'points',
             type: 'Number',
-            value: jsonData.points,
+            value: data.points,
             isReadOnly: true,
           },
           {
             name: 'reservationNumber',
             type: 'Number',
-            value: jsonData.reservationNumber,
+            value: data.confirmationNumber,
             isReadOnly: true,
           },
         ],
-        fileContent: readDocumentAsBase64(context),
+        fileContent: await readDocumentAsBase64(context),
       },
     ],
   }
@@ -126,13 +126,11 @@ async function uploadDocument(context: Context, data: string): Promise<void> {
     Accept: 'application/json',
   })
 
-  console.log('Calling DAS API to upload document')
   const response = await fetch(context.parameters.dasConnector as string, {
     method: 'POST',
     headers: headers,
     body: JSON.stringify(body),
   })
-  console.log(`DAS API response: ${response}`)
 
   const json = await response.json()
   if (!response.ok) {
@@ -142,4 +140,36 @@ async function uploadDocument(context: Context, data: string): Promise<void> {
       }:${JSON.stringify(json)}`
     )
   }
+}
+
+export interface InvoicePayload {
+  Clients: Client[]
+}
+
+export interface Client {
+  ClientID: string
+  id: number
+  hotel: Hotel
+  checkedIn: boolean
+  confirmationNumber: number
+  guests: number
+  creditPrefix: number
+  creditSuffix: number
+  checkInDate: string
+  checkOutDate: string
+  points: number
+  guestName: string
+  guestEmail: string
+  guestClientId: string
+}
+
+export interface Hotel {
+  id: number
+  name: string
+  location: string
+  imageName: string
+  checkInTime: string
+  checkOutTime: string
+  rating: number
+  conciergeUrl: string
 }
