@@ -44,7 +44,7 @@ export function getDescription(): ScriptDescription {
 
 export async function execute(context: Context): Promise<void> {
   const input = await readInputFile(context)
-  await uploadDocument(context, input.Clients[0])
+  await uploadDocument(context, input.Clients[0].Reservation)
 }
 
 async function readInputFile(context: Context): Promise<InvoicePayload> {
@@ -59,7 +59,10 @@ async function readDocumentAsBase64(context: Context): Promise<string> {
   return await context.getFile(documentPath).readAsBase64()
 }
 
-async function uploadDocument(context: Context, data: Client): Promise<void> {
+async function uploadDocument(
+  context: Context,
+  data: Reservation
+): Promise<void> {
   const body = {
     documents: [
       {
@@ -149,16 +152,20 @@ export interface InvoicePayload {
 
 export interface Client {
   ClientID: string
+  Reservation: Reservation
+}
+
+export interface Reservation {
   id: number
   hotel: Hotel
-  checkedIn: boolean
   confirmationNumber: number
   guests: number
   creditPrefix: number
   creditSuffix: number
+  points: number
   checkInDate: string
   checkOutDate: string
-  points: number
+  checkedIn: boolean
   guestName: string
   guestEmail: string
   guestClientId: string
