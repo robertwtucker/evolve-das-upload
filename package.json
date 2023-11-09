@@ -1,6 +1,6 @@
 {
   "name": "das-upload",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An Evolve (Generate) component for uploading docs to Digital Advantage",
   "type": "module",
   "private": true,
