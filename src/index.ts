@@ -44,7 +44,7 @@ export function getDescription(): ScriptDescription {
         id: 'documentId',
         displayName: 'Document ID',
         description: 'The ID assigned to the uploaded document.',
-        type: 'Number',
+        type: 'String',
       },
     ],
   }
@@ -54,7 +54,7 @@ export async function execute(context: Context): Promise<Output> {
   const input = await readInputFile(context)
   const response = await uploadDocument(context, input.Clients[0].Reservation)
   return {
-    documentId: getDocumentId(response),
+    documentId: `${response.documents[0].id}`,
   }
 }
 
@@ -148,24 +148,17 @@ async function uploadDocument(
   })
 
   const json = await response.json()
-  if (!response.ok) {
+
+  if (response.ok) {
+    console.log('Received document ID: ', json.documents[0].id)
+    return json
+  } else {
     throw new Error(
       `Non-OK DAS API response: ${response.status} ${
         response.statusText
       }:${JSON.stringify(json)}`,
     )
   }
-
-  return JSON.parse(json)
-}
-
-function getDocumentId(response: UploadResponse): number {
-  response.documents.forEach((document) => {
-    if (document.documentIndex === 0) {
-      return document.id
-    }
-  })
-  throw new Error('No document ID found in upload response')
 }
 
 export interface InvoicePayload {
@@ -204,12 +197,12 @@ export interface Hotel {
   conciergeUrl: string
 }
 
-export interface UploadResponse {
+interface UploadResponse {
   eventId: string
   documents: [DocumentProps]
 }
 
-export interface DocumentProps {
+interface DocumentProps {
   documentIndex: number
   id: number
 }
